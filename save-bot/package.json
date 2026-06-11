@@ -1,0 +1,12 @@
+{
+  "name": "save-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.0.0"
+  }
+}
