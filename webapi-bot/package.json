@@ -1,5 +1,5 @@
 {
-  "name": "slack-bolt-simple",
+  "name": "webapi-bot",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,6 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@slack/bolt": "^3.0.0"
+    "@slack/web-api": "^7.0.0"
+  },
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2"
   }
 }

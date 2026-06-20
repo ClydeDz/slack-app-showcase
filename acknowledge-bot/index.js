@@ -65,5 +65,5 @@ app.event("channel_unarchive", async ({ event, client }) => {
 
 (async () => {
   await app.start();
-  console.log("🤖 Acknowledge Bot connected to Slack Simulator");
+  console.log("🤖 Acknowledge Bot is running");
 })();

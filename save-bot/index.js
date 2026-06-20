@@ -19,27 +19,38 @@ const app = new App({
  */
 function formatSource(channel) {
   if (!channel) return "unknown";
-  if (channel.startsWith("C")) return `<#${channel}>`;       // public/private channel
-  if (channel.startsWith("D")) return "a direct message";    // 1:1 DM
-  if (channel.startsWith("G")) return "a group DM";          // MPIM / group DM
-  return `\`${channel}\``;                                    // fallback
+  if (channel.startsWith("C")) return `<#${channel}>`; // public/private channel
+  if (channel.startsWith("D")) return "a direct message"; // 1:1 DM
+  if (channel.startsWith("G")) return "a group DM"; // MPIM / group DM
+  return `\`${channel}\``; // fallback
 }
 
-async function sendSavedMessageDM(client, { userId, text, author, channel, ts, trigger }) {
+async function sendSavedMessageDM(
+  client,
+  { userId, text, author, channel, ts, trigger },
+) {
   const authorMention = author ? `<@${author}>` : "Someone";
   const quotedText = text.replace(/\n/g, "\n> ");
 
-  console.log(`[save-bot] channel id="${channel}" → source="${formatSource(channel)}"`);
+  console.log(
+    `[save-bot] channel id="${channel}" → source="${formatSource(channel)}"`,
+  );
 
   // Fetch permalink if we have a ts — gracefully skip if the API isn't supported
   let permalink = null;
   if (channel && ts) {
     try {
-      const result = await client.chat.getPermalink({ channel, message_ts: ts });
+      const result = await client.chat.getPermalink({
+        channel,
+        message_ts: ts,
+      });
       permalink = result.permalink ?? null;
       console.log(`[save-bot] permalink=${permalink}`);
     } catch (err) {
-      console.warn("[save-bot] chat.getPermalink failed — skipping:", err?.data?.error ?? err.message);
+      console.warn(
+        "[save-bot] chat.getPermalink failed — skipping:",
+        err?.data?.error ?? err.message,
+      );
     }
   }
 
@@ -64,9 +75,7 @@ async function sendSavedMessageDM(client, { userId, text, author, channel, ts, t
       },
       {
         type: "context",
-        elements: [
-          { type: "mrkdwn", text: contextText },
-        ],
+        elements: [{ type: "mrkdwn", text: contextText }],
       },
     ],
   });
@@ -78,7 +87,9 @@ async function sendSavedMessageDM(client, { userId, text, author, channel, ts, t
 // event.item.channel + event.item.ts identify the message — fetch text via history.
 
 app.event("reaction_added", async ({ event, client }) => {
-  console.log(`[save-bot] reaction_added: reaction="${event.reaction}" user=${event.user}`);
+  console.log(
+    `[save-bot] reaction_added: reaction="${event.reaction}" user=${event.user}`,
+  );
 
   if (event.reaction !== "eyes") {
     console.log(`[save-bot] ignoring "${event.reaction}" — not eyes`);
@@ -98,8 +109,9 @@ app.event("reaction_added", async ({ event, client }) => {
       inclusive: true,
     });
 
-    const message = history.messages?.find((m) => m.ts === event.item.ts)
-      ?? history.messages?.[0];
+    const message =
+      history.messages?.find((m) => m.ts === event.item.ts) ??
+      history.messages?.[0];
 
     if (!message) {
       console.log("[save-bot] message not found — aborting");
@@ -107,11 +119,11 @@ app.event("reaction_added", async ({ event, client }) => {
     }
 
     await sendSavedMessageDM(client, {
-      userId:  event.user,
-      text:    message.text || "_No text content_",
-      author:  event.item_user,
+      userId: event.user,
+      text: message.text || "_No text content_",
+      author: event.item_user,
       channel: event.item.channel,
-      ts:      event.item.ts,
+      ts: event.item.ts,
       trigger: "👀",
     });
 
@@ -124,7 +136,9 @@ app.event("reaction_added", async ({ event, client }) => {
 // ── reaction_removed ──────────────────────────────────────────────────────────
 
 app.event("reaction_removed", async ({ event }) => {
-  console.log(`[save-bot] reaction_removed: reaction="${event.reaction}" user=${event.user} channel=${event.item?.channel} ts=${event.item?.ts}`);
+  console.log(
+    `[save-bot] reaction_removed: reaction="${event.reaction}" user=${event.user} channel=${event.item?.channel} ts=${event.item?.ts}`,
+  );
 });
 
 // ── pin_added ─────────────────────────────────────────────────────────────────
@@ -143,11 +157,11 @@ app.event("pin_added", async ({ event, client }) => {
     const message = event.item.message;
 
     await sendSavedMessageDM(client, {
-      userId:  event.user,
-      text:    message.text || "_No text content_",
-      author:  message.user,
+      userId: event.user,
+      text: message.text || "_No text content_",
+      author: message.user,
       channel,
-      ts:      message.ts,
+      ts: message.ts,
       trigger: "📌",
     });
 
@@ -160,10 +174,12 @@ app.event("pin_added", async ({ event, client }) => {
 // ── pin_removed ───────────────────────────────────────────────────────────────
 
 app.event("pin_removed", async ({ event }) => {
-  console.log(`[save-bot] pin_removed: user=${event.user} channel=${event.channel_id}`);
+  console.log(
+    `[save-bot] pin_removed: user=${event.user} channel=${event.channel_id}`,
+  );
 });
 
 (async () => {
   await app.start();
-  console.log("🤖 Save Bot connected to Slack Simulator");
+  console.log("🤖 Save Bot is running");
 })();

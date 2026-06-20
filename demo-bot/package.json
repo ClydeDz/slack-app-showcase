@@ -1,5 +1,5 @@
 {
-  "name": "slack-webapi-simple",
+  "name": "demo-bot",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,9 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@slack/web-api": "^7.0.0"
-  },
-  "devDependencies": {
-    "@ljharb/tsconfig": "^0.3.2"
+    "@slack/bolt": "^3.0.0"
   }
 }

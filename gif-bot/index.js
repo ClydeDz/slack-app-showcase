@@ -9,7 +9,8 @@ const app = new App({
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
 });
 
-const GIPHY_FAVICON = "https://www.google.com/s2/favicons?domain=giphy.com&sz=32";
+const GIPHY_FAVICON =
+  "https://www.google.com/s2/favicons?domain=giphy.com&sz=32";
 
 /**
  * Extract a Giphy GIF ID from a giphy.com URL.
@@ -45,7 +46,9 @@ function buildGifMediaUrl(gifId) {
 // We call chat.unfurl with a custom Block Kit preview for each link.
 
 app.event("link_shared", async ({ event, client }) => {
-  console.log(`[gif-bot] link_shared in ${event.channel}, ${event.links?.length} link(s)`);
+  console.log(
+    `[gif-bot] link_shared in ${event.channel}, ${event.links?.length} link(s)`,
+  );
 
   const unfurls = {};
 
@@ -56,7 +59,9 @@ app.event("link_shared", async ({ event, client }) => {
     console.log(`[gif-bot] url=${link.url} → gifId=${gifId}`);
 
     if (!gifId) {
-      console.warn(`[gif-bot] could not extract GIF ID from ${link.url} — skipping`);
+      console.warn(
+        `[gif-bot] could not extract GIF ID from ${link.url} — skipping`,
+      );
       continue;
     }
 
@@ -106,5 +111,5 @@ app.event("link_shared", async ({ event, client }) => {
 
 (async () => {
   await app.start();
-  console.log("🤖 GIF Bot connected to Slack Simulator");
+  console.log("🤖 GIF Bot is running");
 })();

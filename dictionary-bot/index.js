@@ -87,5 +87,5 @@ app.event("app_mention", async ({ event, client }) => {
 
 (async () => {
   await app.start();
-  console.log("🤖 Dictionary Bot connected to Slack Simulator");
+  console.log("🤖 Dictionary Bot is running");
 })();

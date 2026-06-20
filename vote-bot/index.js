@@ -23,5 +23,5 @@ registerViewHandlers(app);
 
 (async () => {
   await app.start();
-  console.log("🗳️ Vote Bot connected to Slack Simulator");
+  console.log("🤖 Vote Bot is running");
 })();

@@ -40,5 +40,5 @@ app.command("/joke", async ({ ack, client, body }) => {
 
 (async () => {
   await app.start();
-  console.log("🤖 Jokes Bot connected to Slack Simulator");
+  console.log("🤖 Jokes Bot is running");
 })();

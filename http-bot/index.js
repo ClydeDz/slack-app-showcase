@@ -7,40 +7,22 @@ const app = new App({
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
 });
 
-// Guard: ignore bot messages to prevent infinite loops.
-// In real Slack, Bolt does this automatically because bot messages have
-// subtype: "bot_message". If the simulator omits the subtype, we guard manually.
-function isHuman(message) {
-  return !message.bot_id && !message.subtype;
-}
-
-// Reply when anyone sends a message containing "hello" (case-insensitive)
-app.message(/hello/i, async ({ message, say }) => {
-  if (!isHuman(message)) return;
-  await say(`Hey <@${message.user}>, you said: \`${message.text}\``);
-});
-
-// React when the bot is mentioned
-app.event("app_mention", async ({ event, say }) => {
-  await say({
-    text: `Yes, <@${event.user}>? You mentioned me! 👋`,
-    thread_ts: event.ts,
+// /echo
+app.command("/echo", async ({ command, ack, respond }) => {
+  await ack();
+  const text = command.text.trim();
+  if (!text) {
+    await respond("Usage: `/echo <your message>`");
+    return;
+  }
+  await respond({
+    blocks: [
+      { type: "section", text: { type: "mrkdwn", text: `You said ${text}` } },
+    ],
   });
 });
 
-// Reply "Pong! 🏓" in a thread when anyone sends "/ping"
-app.message("/ping", async ({ message, say }) => {
-  if (!isHuman(message)) return;
-  await say({ text: "Pong! 🏓", thread_ts: message.ts });
-});
-
-// Start the app and post a startup message to #general
 (async () => {
-  await app.start(4003);
-  console.log("⚡️ Bolt app is running");
-
-  // await app.client.chat.postMessage({
-  //   channel: "C001", // #general
-  //   text: "Bot is online 🤖",
-  // });
+  await app.start();
+  console.log("🤖 Http Bot is running");
 })();
