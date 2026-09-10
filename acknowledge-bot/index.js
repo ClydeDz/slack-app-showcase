@@ -3,7 +3,7 @@ const { App } = pkg;
 
 const app = new App({
   token: "xoxb-slacksim-ack",
-  signingSecret: "slacksim-secret-ack",
+  // signingSecret: "slacksim-secret-ack",
   socketMode: true,
   appToken: "xapp-slacksim-ack",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },

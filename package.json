@@ -1,6 +1,6 @@
 {
   "name": "slack-app-showcase",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "start": "concurrently --kill-others-on-fail -n \"simple,polly,acknowledge,save,vote,httpmode,gif,form,dictionary,jokes\" -c \"blue,magenta,green,yellow,cyan,red,white,gray,brown,orange\" \"yarn --cwd slack-bolt-simple start\" \"yarn --cwd slack-bolt-polly start\" \"yarn --cwd acknowledge-bot start\" \"yarn --cwd save-bot start\" \"yarn --cwd vote-bot start\" \"yarn --cwd http-bot start\" \"yarn --cwd gif-bot start\" \"yarn --cwd form-bot start\" \"yarn --cwd dictionary-bot start\" \"yarn --cwd jokes-bot start\"",

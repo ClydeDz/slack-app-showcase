@@ -1,17 +1,24 @@
 import pkg from "@slack/bolt";
-import { registerMessageHandlers } from "./handlers/messages.js";
-import { registerEventHandlers } from "./handlers/events.js";
-import { registerCommandHandlers } from "./handlers/commands.js";
-import { registerActionHandlers } from "./handlers/actions.js";
-import { registerViewHandlers } from "./handlers/views.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const { App } = pkg;
 
+// Real Slack
+// const app = new App({
+//   token: process.env.BOT_TOKEN,
+//   // signingSecret: process.env.SIGNING_SECRET,
+//   socketMode: true,
+//   appToken: process.env.APP_TOKEN,
+// });
+
+// Slack Simulator
 const app = new App({
-  token: "xoxb-slacksim-second",
-  signingSecret: "slacksim-secret-second",
+  token: "xoxb-slacksim-demo", // Bot User OAuth Token
+  // signingSecret: "slacksim-secret-demo", // from app credentials page
   socketMode: true,
-  appToken: "xapp-slacksim-second",
+  appToken: "xapp-slacksim-demo", // app level tokens
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
 });
 
@@ -46,7 +53,7 @@ app.message(/ping/i, async ({ message, say }) => {
 
 // app_mention → reply in thread + DM the user
 app.event("app_mention", async ({ event, say, client }) => {
-  if (!isHuman(message)) return;
+  if (!isHuman(event)) return;
 
   // Reply in the thread where the mention happened
   await say({
@@ -59,6 +66,16 @@ app.event("app_mention", async ({ event, say, client }) => {
     channel: event.user,
     text: `Hey! You just mentioned me in <#${event.channel}>. Need something? 😊`,
   });
+});
+
+// /echo slash command → echo back whatever text is provided
+app.command("/echo", async ({ command, ack, respond }) => {
+  await ack();
+  if (command.text) {
+    await respond(command.text);
+  } else {
+    await respond("Echo: (nothing to echo)");
+  }
 });
 
 (async () => {

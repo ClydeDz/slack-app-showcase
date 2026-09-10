@@ -9,7 +9,7 @@ const { App } = pkg;
 
 const app = new App({
   token: "xoxb-slacksim-vote",
-  signingSecret: "slacksim-secret-vote",
+  // signingSecret: "slacksim-secret-vote",
   socketMode: true,
   appToken: "xapp-slacksim-vote",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },

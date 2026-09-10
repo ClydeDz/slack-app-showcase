@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = new App({
   token: "xoxb-slacksim-dictionary",
-  signingSecret: "slacksim-secret-dictionary",
+  // signingSecret: "slacksim-secret-dictionary",
   socketMode: true,
   appToken: "xapp-slacksim-dictionary",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },

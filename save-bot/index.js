@@ -3,7 +3,7 @@ const { App } = pkg;
 
 const app = new App({
   token: "xoxb-slacksim-save",
-  signingSecret: "slacksim-secret-save",
+  // signingSecret: "slacksim-secret-save",
   socketMode: true,
   appToken: "xapp-slacksim-save",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
@@ -54,9 +54,11 @@ async function sendSavedMessageDM(
     }
   }
 
-  const contextText = permalink
-    ? `Saved from ${formatSource(channel)} · <${permalink}|View message>`
-    : `Saved from ${formatSource(channel)}`;
+  const contextText = `Saved from ${formatSource(channel)}`;
+  // Slack Simulator doesn't support permalink yet
+  // permalink
+  //   ? `Saved from ${formatSource(channel)} · <${permalink}|View message>`
+  //   : `Saved from ${formatSource(channel)}`;
 
   await client.chat.postMessage({
     channel: userId,

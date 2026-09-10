@@ -62,7 +62,7 @@ When a user reacts to a message when 👀 (eyes) or pins a message, the save bot
 
 ### form-bot
 
-Use the slash command `/form` to trigger a prebuilt two-page form. Upon submitting the form, it will send the submitter a DM with their responses for their record. Demonstrates the capability of a slash command, block kit elements to create the form, and sending a DM to the user with the responses.
+Use the slash command `/form` to trigger a prebuilt two-page form. Upon submitting the form, it will send the submitter a DM with their responses for their record. Demonstrates the capability of a slash command, block kit elements to create the form, using `views.push` to demonstrate multi-step form, using `views.update` to demonstrate conditional form elements, form validation, and sending a DM to the user with the responses.
 
 <img src="docs/images/image-13.png" alt="alt text" width="250">
 <img src="docs/images/image-14.png" alt="alt text" width="250">
@@ -71,7 +71,7 @@ Use the slash command `/form` to trigger a prebuilt two-page form. Upon submitti
 
 ### http-bot
 
-Responds to a 'hello' with a reply in channel, responds to a 'ping' with a reply in thread, and responds to a 'ghost' message with an ephemeral reply in channel visible only to the sender. Also responds to 'app_mention' events. Demonstrates simple capabilities like responding to keywords and app mentions but via HTTP instead of socket mode.
+Responds to a 'hello' with a reply in channel, and responds to 'app_mention' events. Demonstrates simple capabilities like responding to keywords and app mentions but via HTTP instead of socket mode.
 
 <img src="docs/images/image-17.png" alt="alt text" width="250">
 <img src="docs/images/image-18.png" alt="alt text" width="250">
@@ -79,7 +79,7 @@ Responds to a 'hello' with a reply in channel, responds to a 'ping' with a reply
 
 ### demo-bot
 
-Responds to a 'hello' with a reply in channel, responds to a 'ping' with a reply in thread, and responds to a 'ghost' message with an ephemeral reply in channel visible only to the sender. Also responds to 'app_mention' events. Demonstrates simple capabilities like responding to keywords and app mentions via socket mode.
+Responds to a 'hello' with a reply in channel, responds to a 'ping' with a reply in thread, and responds to a 'ghost' message with an ephemeral reply in channel visible only to the sender. Send '/echo hey' to echo your message back to the channel. Also responds to 'app_mention' events. Demonstrates simple capabilities like responding to keywords and app mentions via socket mode.
 
 <img src="docs/images/image-20.png" alt="alt text" width="250">
 <img src="docs/images/image-21.png" alt="alt text" width="250">
@@ -92,9 +92,10 @@ Responds to a 'hello' with a reply in channel, responds to a 'ping' with a reply
 
 ### webapi-bot
 
-Posts a message via `@slack/web-api` when the app is installed. Can also be used to post a message in channels via incoming webhook.
+Demonstrates capabilities like posting a message via `@slack/web-api` (instead os Bolt SDK) when the app is installed. In the simulator, this bot is also configured to demonstrate posting a message in channels via incoming webhook (i.e. via cURL or Postman).
 
 <img src="docs/images/image-26.png" alt="alt text" width="250">
+<img src="docs/images/image-31.png" alt="alt text" width="250">
 
 ## Credits
 

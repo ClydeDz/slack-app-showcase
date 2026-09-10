@@ -7,7 +7,7 @@ import { registerViewHandlers } from "./handlers/views.js";
 
 const app = new App({
   token: "xoxb-slacksim-form",
-  signingSecret: "slacksim-secret-form",
+  // signingSecret: "slacksim-secret-form",
   socketMode: true,
   appToken: "xapp-slacksim-form",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
