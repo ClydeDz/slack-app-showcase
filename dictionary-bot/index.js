@@ -17,8 +17,16 @@ const app = new App({
 app.event("app_mention", async ({ event, client }) => {
   const { text, user, channel } = event;
 
-  // Remove the bot mention from the text
-  const queryWithoutBotMention = text.replace(/<@[A-Z0-9]+>/g, "").trim();
+  const dictionaryBotMention = `@dictionary`;
+
+  if (!text.includes(dictionaryBotMention)) {
+    return;
+  }
+
+  // Remove the dictionary bot mention from the text
+  const queryWithoutBotMention = text
+    .replaceAll(dictionaryBotMention, "")
+    .trim();
 
   if (!queryWithoutBotMention) {
     await client.chat.postMessage({
@@ -87,5 +95,6 @@ app.event("app_mention", async ({ event, client }) => {
 
 (async () => {
   await app.start();
-  console.log("🤖 Dictionary Bot is running");
+  const authResult = await app.client.auth.test();
+  console.log("🤖 Dictionary Bot is running", authResult.user_id);
 })();

@@ -22,6 +22,12 @@ app.message(/hello/i, async ({ message, say }) => {
 
 // React when the bot is mentioned
 app.event("app_mention", async ({ event, say }) => {
+  const httpBotMention = `@http`;
+
+  if (!event.text.includes(httpBotMention)) {
+    return;
+  }
+
   await say({
     text: `Yes, <@${event.user}>? You mentioned me! 👋`,
     thread_ts: event.ts,

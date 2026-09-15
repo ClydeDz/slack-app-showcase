@@ -55,6 +55,12 @@ app.message(/ping/i, async ({ message, say }) => {
 app.event("app_mention", async ({ event, say, client }) => {
   if (!isHuman(event)) return;
 
+  const demoBotMention = `@demo`;
+
+  if (!event.text.includes(demoBotMention)) {
+    return;
+  }
+
   // Reply in the thread where the mention happened
   await say({
     text: `Yes, <@${event.user}>? You mentioned me! 👋`,

@@ -2,8 +2,7 @@ import pkg from "@slack/bolt";
 const { App } = pkg;
 
 const app = new App({
-  token: "xoxb-slacksim-jokes",
-  // signingSecret: "slacksim-secret-jokes",
+  token: "xoxb-slacksim-jokes", 
   socketMode: true,
   appToken: "xapp-slacksim-jokes",
   clientOptions: { slackApiUrl: "http://localhost:4500/api/" },
@@ -28,6 +27,12 @@ app.command("/joke", async ({ ack, client, body }) => {
       ts: message.ts,
       text: data.value,
     });
+
+    // // If you want to delete a previously sent message
+    // await client.chat.delete({
+    //   channel: body.channel_id,
+    //   ts: message.ts,
+    // });
   } catch (error) {
     console.error("[jokes-bot] Error fetching joke:", error);
     await client.chat.update({
