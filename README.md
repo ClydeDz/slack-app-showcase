@@ -2,7 +2,8 @@
 
 A collection of Slack Apps that demonstrate different use cases. These were built to test the [Slack Simulator](https://github.com/ClydeDz/slack-simulator) but can be used as a standalone reference/template as well.
 
-[![Buy me a coffee](https://img.shields.io/static/v1.svg?label=Buy%20me%20a%20coffee&message=%20&color=6f4e37&logo=buy%20me%20a%20coffee&logoColor=white&labelColor=6f4e37)](https://ko-fi.com/clydedsouza)
+[![Sponsor](https://img.shields.io/badge/Sponsor-Support%20This%20Project-green?logo=githubsponsors&logoColor=white)](https://sponsor.clydedsouza.net/)
+[![Slack Simulator](https://img.shields.io/badge/GitHub-Get_Slack_Simulator-b2324b?logo=github&logoColor=white)](https://github.com/ClydeDz/slack-simulator)
 [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/clydedz)](https://x.com/ClydeDz)
 
 ## Apps
